@@ -1,0 +1,28 @@
+<h2>ByCountry</h2>
+<hr>
+<!-- input search the country -->
+<div class="row">
+  <div class="col">
+    <app-inputCountry
+      (onEnter)="search($event)"
+      (onDebounce)="suggestion($event)"
+      placeholder="search by country name" />
+  </div>
+</div>
+
+<hr>
+
+<div
+  *ngIf="getError"
+  class="alert alert-danger">
+  <p>We couldn't find nothing with the term<b> "{{term}}"</b> </p>
+</div>
+<!-- country tablet see the information -->
+<div class="row">
+  <div
+    *ngIf="countries.length > 0"
+    class="col">
+    <app-tableCountry
+      [countries]="countries" />
+  </div>
+</div>

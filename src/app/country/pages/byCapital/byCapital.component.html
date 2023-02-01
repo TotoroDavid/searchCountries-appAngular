@@ -1,0 +1,31 @@
+<h2>ByCapital</h2>
+<hr>
+<!-- input search the country -->
+<div class="row">
+  <div class="col">
+
+    <!-- input
+      Component -->
+    <app-inputCountry
+      (onEnter)="search($event)"
+      placeholder="Search By Capital name" />
+
+  </div>
+</div>
+
+<hr>
+
+<div
+  *ngIf="getError"
+  class="alert alert-danger">
+  <p>We couldn't find nothing with the term<b> "{{term}}"</b> </p>
+</div>
+<!-- country tablet see the information -->
+<div class="row">
+  <div
+    *ngIf="countries.length > 0"
+    class="col">
+    <app-tableCountry
+      [countries]="countries" />
+  </div>
+</div>
