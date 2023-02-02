@@ -1,6 +1,7 @@
 <h2>ByCountry</h2>
 <hr>
-<!-- input search the country -->
+<!-- 'input' 
+  search the country -->
 <div class="row">
   <div class="col">
     <app-inputCountry
@@ -9,6 +10,30 @@
       placeholder="search by country name" />
   </div>
 </div>
+
+<!-- suggestion Countries -->
+<ul
+  *ngIf="showSuggested"
+  class="list-group">
+  <li
+    *ngFor="let country of suggestedCountries"
+    class="list-group-item list-group-item-action">
+    <a
+      class="nav-link"
+      [routerLink]="['/country', country.altSpellings[0]]">
+      {{country.name.common}}
+    </a>
+  </li>
+  <li
+    (click)="searchSuggested(term)"
+    class="list-group-item list-group-item-action">
+    <a class="nav-link">
+      Search "{{term}}"
+    </a>
+  </li>
+</ul>
+
+
 
 <hr>
 

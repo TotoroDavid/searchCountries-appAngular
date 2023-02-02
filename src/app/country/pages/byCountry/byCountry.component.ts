@@ -11,9 +11,11 @@ export class ByCountryComponent {
 
   @Input() placeholder: string = ''
 
-  term = 'ia'
+  term = ''
   getError: boolean = false
   countries: CountryProps[] = []
+  suggestedCountries: CountryProps[] = []
+  showSuggested: boolean = false
 
 
   constructor(
@@ -23,12 +25,16 @@ export class ByCountryComponent {
   ) { }
 
   search(term: string) {
+
+    this.showSuggested = false
     this.getError = false
     this.term = term
+    console.log(term)
+
 
     this.countryService.searchCountry(term)
       .subscribe((countries) => {
-        console.log(countries);
+        // console.log(countries)
         this.countries = countries
 
 
@@ -40,8 +46,20 @@ export class ByCountryComponent {
   }
   suggestion(term: string) {
 
+    this.showSuggested = true
     this.getError = false
+    this.term = term
+    this.countryService.searchCountry(term)
+      .subscribe(
+        countries => this.suggestedCountries = countries.splice(0, 5),
+        (err) => this.suggestedCountries = []
+      )
+  }
 
+  searchSuggested(term: string) {
+
+    this.search(term)
+    this.showSuggested = false
 
   }
 
